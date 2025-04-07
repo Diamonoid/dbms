@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h1>EPIDEMIC MANAGEMENT SYSTEM</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up</title>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(100deg, #fff6df 20%, #217885 120%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .auth-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background-color: #217885;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #1a5f6a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(33, 120, 133, 0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            outline: none;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            padding-left: 20px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #217885;
+            box-shadow: 0 0 10px rgba(33, 120, 133, 0.1);
+        }
+
+        .toggle-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .toggle-buttons button {
+            width: 48%;
+            background-color: transparent;
+            border: 2px solid #217885;
+            color: #217885;
+            font-weight: bold;
+        }
+
+        .toggle-buttons button:hover {
+            background-color: #217885;
+            color: white;
+        }
+
+        .role-selection {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .role-selection label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .role-selection input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h2 {
+            color: #217885;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .admin-signin {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .admin-signin a {
+            color: #217885;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .admin-signin a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .auth-container {
+                padding: 30px;
+            }
+
+            button, input {
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        .visitor-link {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .visitor-link a {
+            color: #217885;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .visitor-link a:hover {
+            text-decoration: underline;
+        }
+        .button {
+            width: 50%;
+            padding: 14px;
+            margin-top: 20px;
+            background-color: #217885;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            background-color: white;
+            color:#217885 ;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(33, 120, 133, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="auth-container">
+            <div class="toggle-buttons">
+                <button id="signInBtn">Sign In</button>
+                <a href="{% url 'signup2' %}" class="button">signup</a>
+            </div>
+            
+            <!-- Sign In Form -->
+            <form id="signInForm" method="POST" action="{% url 'signin' %}">
+                {% csrf_token %}
+                <h2>Sign In</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <input type="email" name="email" id="signInEmail" placeholder="Email" required>
+                <input type="password" name="password" id="signInPassword" placeholder="Password" required>
+                <button type="submit" id="signInSubmitBtn">Sign In</button>
+                <div class="admin-signin">
+                    Are you an admin? <a href="{% url 'admin:index' %}">Sign in as Admin</a>
+                </div>
+                <div class="visitor-link">
+                    <a href="{% url 'Visitor' %}">Continue as visitor</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const signInBtn = document.getElementById('signInBtn');
+        const signUpBtn = document.getElementById('signUpBtn');
+
+
+        signInBtn.addEventListener('click', () => {
+            signInForm.classList.remove('hidden');
+            signUpForm.classList.add('hidden');
+        });
+
+        signUpBtn.addEventListener('click', () => {
+            signUpForm.classList.remove('hidden');
+            signInForm.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

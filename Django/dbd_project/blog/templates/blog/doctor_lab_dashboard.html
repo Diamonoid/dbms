@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor/Lab Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #32777f;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #fff6df
+v            ;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 1.5em;
+        }
+
+        .dashboard-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a:hover {
+            background-color: #287e89;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        h2 {
+            color: #000000; 
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .card th, .card td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .card th {
+            background-color: #f8f8f8;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #000000;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Doctor/Lab Dashboard</h1>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a href="#patient-records">View Patient Records</a>
+            <a href="#manage-test-samples">Manage Test Samples</a>
+            <a href="#update-critical-cases">Update Critical Cases</a>
+            <a href="#view-assets">View Asset Availability</a>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <!-- Patient Records -->
+            <div id="patient-records" class="card">
+                <h2>Patient Records</h2>
+                <p>Doctors and lab staff can access and view patients' medical records including symptoms, test results, and migration history.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Symptoms</th>
+                            <th>Test Results</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>John Doe</td>
+                            <td>45</td>
+                            <td>Fever, Cough</td>
+                            <td>Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Manage Test Samples -->
+            <div id="manage-test-samples" class="card">
+                <h2>Manage Test Samples</h2>
+                <p>Lab staff can update or add test results, including sample type and collection dates.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sample ID</th>
+                            <th>Patient Name</th>
+                            <th>Sample Type</th>
+                            <th>Collection Date</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1001</td>
+                            <td>John Doe</td>
+                            <td>Blood</td>
+                            <td>2024-10-20</td>
+                            <td>Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Update Critical Cases -->
+            <div id="update-critical-cases" class="card">
+                <h2>Update Critical Cases</h2>
+                <p>Doctors can update the treatment status and condition of critical patients.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Condition</th>
+                            <th>Treatment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>002</td>
+                            <td>Jane Smith</td>
+                            <td>Critical</td>
+                            <td>Oxygen Therapy</td>
+                            <td>Stable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- View Asset Availability -->
+            <div id="view-assets" class="card">
+                <h2>View Asset Availability</h2>
+                <p>Lab staff can check and update medical asset availability (ventilators, oxygen cylinders, etc.).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Availability</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ventilators</td>
+                            <td>5 Available</td>
+                            <td>2024-10-21</td>
+                        </tr>
+                        <tr>
+                            <td>Oxygen Cylinders</td>
+                            <td>15 Available</td>
+                            <td>2024-10-21</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

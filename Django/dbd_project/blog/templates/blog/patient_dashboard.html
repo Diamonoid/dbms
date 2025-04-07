@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #32777f;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {    
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .options div {
+            background-color: #1e7e8f;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            margin: 10px;
+            width: 30%;
+            text-align: center;
+        }
+        .options div:hover {
+            background-color: #e7e7e7;
+            cursor: pointer;
+        }
+        .data-display {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 252, 252, 0.1);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #c7c6c6;
+            padding: 8px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+        /* Previous CSS styles remain the same */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Dashboard</h1>
+        
+        <div class="data-display">
+            <h2>Personal Information</h2>
+            <table>
+                <tr>
+                    <th>Patient ID</th>
+                    <td>{{ patient.id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ patient.name }}</td>
+                </tr>
+                <tr>
+                    <th>DOB</th>
+                    <td>{{ patient.dob }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ patient.gender }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ patient.address }}</td>
+                </tr>
+                <tr>
+                    <th>Registration Date</th>
+                    <td>{{ patient.registration_date }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ patient.status }}</td>
+                </tr>
+                <tr>
+                    <th>Contact Info</th>
+                    <td>Email: {{ patient.contact_info }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="data-display">
+            <h2>Lab Test Results</h2>
+            <table>
+                <tr>
+                    <th>Sample Collected</th>
+                    <th>Test Result</th>
+                    <th>Collection Date</th>
+                    <th>Result Date</th>
+                </tr>
+                {% for result in lab_results %}
+                <tr>
+                    <td>{{ result.sample_type }}</td>
+                    <td>{{ result.result }}</td>
+                    <td>{{ result.collection_date }}</td>
+                    <td>{{ result.result_date }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="data-display">
+            <h2>Migration Details</h2>
+            <table>
+                <tr>
+                    <th>Migration Date</th>
+                    <th>Location</th>
+                    <th>Reason</th>
+                </tr>
+                {% for migration in migrations %}
+                <tr>
+                    <td>{{ migration.date }}</td>
+                    <td>{{ migration.location }}</td>
+                    <td>{{ migration.reason }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

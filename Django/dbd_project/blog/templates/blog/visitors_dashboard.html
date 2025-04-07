@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Resources Dashboard</title>
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(100deg, #fff6df 0%, #16707e 120%);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Main Container */
+.main-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Auth Container */
+.dashboard-container {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+/* Button Styles */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #333;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+/* Input Field Styles */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    padding-left: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #333;
+}
+
+/* Section Titles */
+h1, h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    border-bottom: 2px solid #284e4c;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #000000;
+}
+
+/* Section Styling */
+.section {
+    margin-bottom: 30px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #32777f;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    input {
+        font-size: 12px;
+    }
+
+    h1, h2 {
+        font-size: 18px;
+    }
+}
+        /* ... Keep all the existing CSS ... */
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Medical Resources Dashboard</h1>
+
+        <!-- Lab Staff and Doctors Section -->
+        <div class="section">
+            <h2>Lab Staff & Doctors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Contact Info</th>
+                        <th>Specialization</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for staff in lab_staff_doctors %}
+                    <tr>
+                        <td>{{ staff.name }}</td>
+                        <td>{{ staff.role }}</td>
+                        <td>{{ staff.contact_info }}</td>
+                        <td>{{ staff.specialization }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No staff members available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Asset Availability Section -->
+        <div class="section">
+            <h2>Asset Availability</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asset Type</th>
+                        <th>Location</th>
+                        <th>Available Units</th>
+                        <th>Assigned Staff</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asset in assets %}
+                    <tr>
+                        <td>{{ asset.asset_type }}</td>
+                        <td>{{ asset.location }}</td>
+                        <td>{{ asset.available_units }}</td>
+                        <td>{{ asset.lab_staff.name }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No assets available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Guidelines Section -->
+        <div class="section">
+            <h2>Medical Guidelines</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symptom</th>
+                        <th>Description</th>
+                        <th>Date Effective</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for guideline in guidelines %}
+                    <tr>
+                        <td>{{ guideline.symptom }}</td>
+                        <td>{{ guideline.description }}</td>
+                        <td>{{ guideline.date_effective }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No guidelines available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

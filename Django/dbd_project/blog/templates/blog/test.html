@@ -1,0 +1,295 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .models import User as uuser  # Assuming you have a CustomUser model with a role field
+
+def signin(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            # First check if user exists
+            user = uuser.objects.get(email=email)
+            
+            # If user exists, verify password
+            if user.password == password:  # Note: In production, use proper password hashing
+                # Manual authentication since we're using direct password comparison
+               
+                if user.role == 'Doctor':
+                    return redirect('Doctor')
+                elif user.role == 'Patient':
+                    return redirect('Patient')
+                else:
+                    messages.error(request, "Invalid role assigned to user.")
+                    return redirect('signin')
+            else:
+                messages.error(request, "Invalid email or password.")
+                return redirect('signin')
+                
+        except User.DoesNotExist:
+            messages.error(request, "User does not exist.")
+            return redirect('signin')
+        except Exception as e:
+            messages.error(request, f"Error during sign in: {e}")
+            return redirect('signin')
+
+    return render(request, 'blog/HTML FOR FRONT END.html')
+
+
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #32777f;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {    
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .options {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    .options div {
+        background-color: #1e7e8f;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        margin: 10px;
+        width: 30%;
+        text-align: center;
+    }
+    .options div:hover {
+        background-color: #e7e7e7;
+        cursor: pointer;
+    }
+    .data-display {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(255, 252, 252, 0.1);
+        margin-bottom: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    table th, table td {
+        border: 1px solid #c7c6c6;
+        padding: 8px;
+        text-align: left;
+    }
+    table th {
+        background-color: #f2f2f2;
+    }
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #32777f;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {    
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .options div {
+            background-color: #1e7e8f;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            margin: 10px;
+            width: 30%;
+            text-align: center;
+        }
+        .options div:hover {
+            background-color: #e7e7e7;
+            cursor: pointer;
+        }
+        .data-display {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 252, 252, 0.1);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #c7c6c6;
+            padding: 8px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Dashboard</h1>
+        
+        
+        
+        <!-- Displayed Data Section -->
+        <div class="data-display">
+            <h2>Personal Information</h2>
+            <table>
+                <tr>
+                    <th>Patient ID</th>
+                    <td>P12345</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>John Doe</td>
+                </tr>
+                <tr>
+                    <th>DOB</th>
+                    <td>1990-05-10</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>Male</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>123 Main St, City, Country</td>
+                </tr>
+                <tr>
+                    <th>Registration Date</th>
+                    <td>2023-09-15</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>Under Treatment</td>
+                </tr>
+                <tr>
+                    <th>Symptoms</th>
+                    <td>Fever, Cough</td>
+                </tr>
+                <tr>
+                    <th>Contact Info</th>
+                    <td>Phone: +123456789, Email: johndoe@example.com</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="data-display">
+            <h2>Lab Test Results</h2>
+            <table>
+                <tr>
+                    <th>Sample Collected</th>
+                    <th>Test Result</th>
+                    <th>Collection Date</th>
+                    <th>Result Date</th>
+                </tr>
+                <tr>
+                    <td>Nasal Swab</td>
+                    <td>Negative</td>
+                    <td>2024-10-10</td>
+                    <td>2024-10-12</td>
+                </tr>
+                <tr>
+                    <td>Blood Test</td>
+                    <td>Normal</td>
+                    <td>2024-10-08</td>
+                    <td>2024-10-10</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="data-display">
+            <h2>Health Guidelines</h2>
+            <p>Please follow these guidelines:</p>
+            <ul>
+                <li>Rest at home for at least 7 days.</li>
+                <li>Stay hydrated and monitor symptoms.</li>
+                <li>Contact your doctor if symptoms worsen.</li>
+            </ul>
+        </div>
+
+        <div class="data-display">
+            <h2>Migration Details</h2>
+            <table>
+                <tr>
+                    <th>Migration Date</th>
+                    <th>Location</th>
+                    <th>Reason</th>
+                </tr>
+                <tr>
+                    <td>2024-09-30</td>
+                    <td>City A to City B</td>
+                    <td>Quarantine transfer</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="data-display">
+            <h2>Critical Case Updates</h2>
+            <p>Status: <strong>Stable</strong></p>
+            <p>Condition monitored by Doctor: Dr. Smith.</p>
+        </div>
+    </div>
+
+    <script>
+        // Placeholder for actions like toggling views or fetching/updating data
+        document.getElementById('personalInfo').addEventListener('click', () => {
+            alert("Displaying personal medical information.");
+            // Add logic to load dynamic data or redirect to the personal info section
+        });
+
+        document.getElementById('updateContact').addEventListener('click', () => {
+            alert("Update contact info functionality.");
+            // Add logic to load dynamic data or redirect to contact info update page
+        });
+
+        document.getElementById('viewGuidelines').addEventListener('click', () => {
+            alert("Displaying health guidelines.");
+            // Add logic to load dynamic data or redirect to health guidelines section
+        });
+
+        document.getElementById('viewLabResults').addEventListener('click', () => {
+            alert("Displaying lab test results.");
+            // Add logic to load dynamic data or redirect to lab results section
+        });
+
+        document.getElementById('checkMigration').addEventListener('click', () => {
+            alert("Displaying migration details.");
+            // Add logic to load dynamic data or redirect to migration details section
+        });
+    </script>
+</body>
+</html>

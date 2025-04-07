@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Epidemic Management System</title>
+  
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #07948d 0%, #640523 100%);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Main Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header */
+    .header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #333;
+      padding-top: 20px;
+      height: 100vh;
+      color: white;
+      border-radius: 10px 0 0 10px;
+      flex-shrink: 0;
+    }
+
+    .sidebar a {
+      padding: 15px;
+      text-decoration: none;
+      color: white;
+      display: block;
+      border-bottom: 1px solid #444;
+    }
+
+    .sidebar a:hover {
+      background-color: #07948d;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #07948d;
+      padding-bottom: 10px;
+      color: #07948d;
+      font-size: 24px;
+    }
+
+    /* Card Styles */
+    .card {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    /* Table Styles */
+    .card table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .card table, .card th, .card td {
+      border: 1px solid #ddd;
+    }
+
+    .card th, .card td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .card th {
+      background-color: #07948d;
+      color: white;
+    }
+
+    /* Button Styles */
+    .btn {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 25px;
+      font-size: 15px;
+      width: 100%;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #444;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+      }
+
+      .main-content {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Sidebar for navigation -->
+    <div class="sidebar">
+      <a href="#manageUsers">Manage Users</a>
+      <a href="#viewEditPatient">View/Edit Patient Information</a>
+      <a href="#manageStaff">Manage Lab Staff/Doctor Records</a>
+      <a href="#manageAssets">Manage Assets</a>
+      <a href="#viewCriticalCases">View Critical Cases</a>
+      <a href="#manageGuidelines">Manage Guidelines</a>
+    </div>
+
+    <!-- Main content area -->
+    <div class="main-content">
+      <!-- Manage Users -->
+      <div id="manageUsers" class="card">
+        <h2>Manage Users</h2>
+        <p>Add, delete, or update information for Patients, Lab Staff/Doctors, and Visitors.</p>
+        <button class="btn">Add User</button>
+        <button class="btn">Delete User</button>
+        <button class="btn">Update User</button>
+      </div>
+
+      <!-- View/Edit Patient Information -->
+      <div id="viewEditPatient" class="card">
+        <h2>View/Edit Patient Information</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name</th>
+              <th>DOB</th>
+              <th>Gender</th>
+              <th>Address</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data rows will go here -->
+            <tr>
+              <td>1</td>
+              <td>John Doe</td>
+              <td>1990-01-15</td>
+              <td>Male</td>
+              <td>123 Main St</td>
+              <td>Recovered</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Manage Lab Staff/Doctor Records -->
+      <div id="manageStaff" class="card">
+        <h2>Manage Lab Staff/Doctor Records</h2>
+        <p>Add or update lab staff details, including roles and specializations.</p>
+        <button class="btn">Add Lab Staff/Doctor</button>
+        <button class="btn">Update Lab Staff/Doctor</button>
+      </div>
+
+      <!-- Manage Assets -->
+      <div id="manageAssets" class="card">
+        <h2>Manage Assets</h2>
+        <p>Monitor and update the availability of medical equipment like ventilators, oxygen cylinders, etc.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Asset ID</th>
+              <th>Asset Type</th>
+              <th>Location</th>
+              <th>Available Units</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>101</td>
+              <td>Ventilator</td>
+              <td>City Hospital</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- View Critical Cases -->
+      <div id="viewCriticalCases" class="card">
+        <h2>View Critical Cases</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Patient ID</th>
+              <th>Condition</th>
+              <th>Critical Date</th>
+              <th>Treatment Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5001</td>
+              <td>1</td>
+              <td>Severe</td>
+              <td>2024-08-15</td>
+              <td>In Treatment</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Manage Guidelines -->
+      <div id="manageGuidelines" class="card">
+        <h2>Manage Guidelines</h2>
+        <p>Add or update health guidelines for managing symptoms and critical cases.</p>
+        <button class="btn">Add Guideline</button>
+        <button class="btn">Update Guideline</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
